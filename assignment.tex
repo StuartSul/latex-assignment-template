@@ -1,0 +1,234 @@
+%--------------------------------------------------------------------
+%
+% LaTeX Template for University Assignments
+% Author: Stuart Sul (https://github.com/stuartsul)
+%
+%--------------------------------------------------------------------
+
+
+%--------------------------------------------------------------------
+%------------------------------ MACROS ------------------------------
+%--------------------------------------------------------------------
+
+% Personal Information
+\newcommand{\name}{Stuart Sul}
+\newcommand{\email}{stuartsul@stanford.edu}
+\newcommand{\submissiondate}{December 1, 2024}
+
+% University and Course Information
+\newcommand{\school}{Stanford University}
+\newcommand{\department}{Department of Computer Science}
+\newcommand{\coursecode}{CS 000}
+\newcommand{\coursename}{A Hypothetical Course on Advanced Topics}
+\newcommand{\assignment}{Homework 1}
+
+% Path to the university logo file (ensure the image has a 1:1 aspect ratio)
+\newcommand{\logo}{logo.png}
+
+%--------------------------------------------------------------------
+%---------------------------- FORMATTING ----------------------------
+%--------------------------------------------------------------------
+
+% Define document class and global settings
+\documentclass[letterpaper,11pt]{article}
+
+% Math libraries
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{pgfplots}
+\usepackage{circuitikz}
+\pgfplotsset{compat=1.17}
+\usetikzlibrary{shapes.geometric}
+
+% Page margins
+\usepackage[top=1in, bottom=1in, left=1in, right=1in]{geometry}
+
+% Typography
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{microtype}
+
+% Set header and footer
+\usepackage{fancyhdr}
+\setlength{\headheight}{15pt}
+\setlength{\headsep}{20pt}
+\setlength{\footskip}{25pt}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\coursecode \space - \assignment}
+\fancyhead[R]{\thepage}
+\fancyfoot[R]{\rule{\textwidth}{0.5pt}\\\name}
+
+% Paragraph formatting
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{2pt}
+\linespread{1.1}
+
+% Use hyphenation as much as possible, to ensure even word spacing
+\tolerance=1
+\hyphenpenalty=1
+
+% Clickable and same-style hyperlinks
+\usepackage[hidelinks]{hyperref}
+\urlstyle{same}
+
+% Set boxed text padding
+\setlength{\fboxsep}{7pt}
+
+% Settings for machine-readable and ATS-friendly PDF
+\input{glyphtounicode}
+\pdfgentounicode=1
+\hypersetup{
+    pdftitle={\name},
+    pdfauthor={\name}
+}
+
+% Set up university logo
+\usepackage[pages=some]{background}
+\usepackage{graphicx}
+\backgroundsetup{
+  scale=1,
+  angle=0,
+  opacity=0.2,
+  position=current page.north west,
+  vshift=-100pt,
+  hshift=100pt,
+  contents={
+    \includegraphics[width=100px,height=100px]{\logo}
+    }
+}
+
+% Allow multiline math equations to go over pages
+\allowdisplaybreaks
+
+%--------------------------------------------------------------------
+%------------------------- CUSTOM COMMANDS --------------------------
+%--------------------------------------------------------------------
+
+% Problem header
+\newcommand{\problem}[1]{
+    \vspace{10pt}\textbf{\Large Problem #1}\\\vspace{-5pt}
+}
+
+%--------------------------------------------------------------------
+%------------------------- DOCUMENT HEADING -------------------------
+%--------------------------------------------------------------------
+
+\begin{document}
+
+% Insert university logo
+\BgThispage
+
+% Suppress header on the first page
+\thispagestyle{empty}
+
+% Title
+\begin{center}
+    \textsc{\school} \\
+    \textsc{\department} \\\vspace{-5pt}
+\end{center}
+\rule{\textwidth}{1pt} \\\vspace{-15pt}
+
+% Course Information
+\begin{center}
+    \coursecode: \coursename \\\vspace{10pt}
+    \textbf{\LARGE \assignment} \\\vspace{-5pt}
+\end{center}
+\rule{\textwidth}{2pt} \\\vspace{-5pt}
+
+% Personal Information
+\begin{center}
+    \large \name \\\vspace{3pt}
+    \email \\\vspace{3pt}
+    \submissiondate \\\vspace{20pt}
+\end{center}
+
+% Set math block spacing for the rest of the document
+\setlength{\abovedisplayskip}{0pt}
+\setlength{\belowdisplayskip}{0pt}
+
+%--------------------------------------------------------------------
+%--------------------------- DOCUMENT BODY --------------------------
+%--------------------------------------------------------------------
+
+\problem{1}
+
+\textbf{(a) Checking for Independence:}  
+To determine independence, we solve the equation $c_1 \vec{w_1} + c_2 \vec{w_2} + c_3 \vec{w_3} = 0$. This expands to:
+
+\begin{align*}
+    c_1 + c_2 + c_3 &= 0 \\
+    c_2 + c_3 &= 0 \\
+    c_3 &= 0 \\
+\end{align*}
+
+From the last equation, we see that $c_3 = 0$. Substituting into the second equation gives $c_2 = 0$, and finally, the first equation gives $c_1 = 0$.  
+Thus, the three vectors are \textbf{independent}. \\
+
+\textbf{(b) Orthogonality:}  
+The three vectors $\vec{w_k}$ are \textbf{not orthogonal} since $\langle \vec{w_1}, \vec{w_2} \rangle = 1$, $\langle \vec{w_2}\vec{w_3} \rangle = 2$, and $\langle \vec{w_1}, \vec{w_3} \rangle = 1$. 
+Hence, we apply the Gram-Schmidt orthogonalization process, obtaining the orthogonal vectors $\vec{b_1}, \vec{b_2}, \vec{b_3}$:
+
+\begin{align*}
+    \vec{b_1} &= \vec{w_1} = \begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix} \\
+    \vec{b_2} &= \vec{w_2} - P_{\vec{b_1}} \vec{w_2} = \begin{bmatrix} 0 \\ 1 \\ 0 \end{bmatrix} \\
+    \vec{b_3} &= \vec{w_3} - P_{\vec{b_1}} \vec{w_3} - P_{\vec{b_2}} \vec{w_3} = \begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix}
+\end{align*}
+
+\problem{2}
+
+\textbf{(a) Checking for Independence:}  
+To check independence, solve $c_1 \vec{w_1} + c_2 \vec{w_2} + c_3 \vec{w_3} = 0$, which when expanded gives the following system:
+
+\begin{align*}
+    c_1 + 2c_2 &= 0 \\
+    c_1 - c_2 + c_3 &= 0 \\
+    c_1 - c_2 - c_3 &= 0 \\
+\end{align*}
+
+From the first equation, $c_1 = -2c_2$. Substituting into the second and third equations yields $c_2 = 0$, and thus $c_3 = 0$. Finally, $c_1 = 0$.  
+Hence, the vectors $\vec{w_k}$ are \textbf{independent}. \\
+
+\textbf{(b) Orthogonality:}  
+The vectors $\vec{w_k}$ are \textbf{orthogonal} since:
+
+\begin{align*}
+    \langle \vec{w_1}, \vec{w_2} \rangle = 0 \quad 
+    \langle \vec{w_2}, \vec{w_3} \rangle = 0 \quad 
+    \langle \vec{w_1}, \vec{w_3} \rangle = 0 \\
+\end{align*}
+
+\textbf{(c) Orthonormal Basis:}  
+The norms of the vectors are:
+
+\begin{align*}
+    |\vec{w_1}| = \sqrt{3} \quad
+    |\vec{w_2}| = \sqrt{6} \quad
+    |\vec{w_3}| = \sqrt{2} \\
+\end{align*}
+
+Thus, the orthonormal basis is:
+
+\begin{align*}
+    \hat{b_1} &= \frac{\vec{w_1}}{|\vec{w_1}|} = \frac{1}{\sqrt{3}} \begin{bmatrix} 1 \\ 1 \\ 1 \end{bmatrix} \\
+    \hat{b_2} &= \frac{\vec{w_2}}{|\vec{w_2}|} = \frac{1}{\sqrt{6}} \begin{bmatrix} 2 \\ -1 \\ -1 \end{bmatrix} \\
+    \hat{b_3} &= \frac{\vec{w_3}}{|\vec{w_3}|} = \frac{1}{\sqrt{2}} \begin{bmatrix} 0 \\ 1 \\ -1 \end{bmatrix} \\
+\end{align*}
+
+\vspace{10pt}
+
+\textbf{(d) Transformation Matrix:}  
+The coordinate transformation matrix from $\hat{e_i}$ to $\hat{b_k}$ is:
+
+\begin{align*}
+    M =
+    \begin{bmatrix}
+        \frac{1}{\sqrt{3}} & \frac{1}{\sqrt{3}} & \frac{1}{\sqrt{3}} \\
+        \frac{2}{\sqrt{6}} & -\frac{1}{\sqrt{6}} & -\frac{1}{\sqrt{6}} \\
+        0 & \frac{1}{\sqrt{2}} & -\frac{1}{\sqrt{2}}
+    \end{bmatrix}
+\end{align*}
+
+\end{document}
